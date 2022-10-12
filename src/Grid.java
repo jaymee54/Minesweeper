@@ -25,7 +25,7 @@ public class Grid {
 
     public void distribute_bombs(Tile tile){
         Random rand = new Random();
-        int Random_number = rand.nextInt(x_axis*y_axis)
+        int Random_number = rand.nextInt(x_axis*y_axis);
         if(Random_number < Expected){
             tile.SetBomb(true);
         }
