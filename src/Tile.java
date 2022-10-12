@@ -8,7 +8,7 @@ public class Tile {
     public Tile(int[] Location) {
         this.Location = Location;
         this.Bomb = false;
-        this.Hidden = true;
+        this.Hidden = false;
     }
 
     public void setBomb(boolean Bomb) {

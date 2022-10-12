@@ -3,10 +3,9 @@ import java.util.Random;
 public class Grid {
     int x_axis;
     int y_axis;
-
     double difficulty = 1;
-
-    double Expected = x_axis*y_axis*difficulty;
+    int Bomb_count = 0;
+    double Expected;
 
     Tile[][] Tile_array;
 
@@ -14,28 +13,34 @@ public class Grid {
     public Grid(int x_axis,int y_axis){
         this.x_axis = x_axis;
         this.y_axis = y_axis;
+        Expected = x_axis*y_axis*difficulty/7;
         this.Tile_array = new Tile[x_axis][y_axis];
         for (int x=0;x <= x_axis-1;++x){
             for (int y=0; y <= y_axis-1; ++y){
                 int[] Location = {x,y};
                 Tile_array[Location[0]][Location[1]] = new Tile(Location);
-                Distribute_bombs(Tile_array[Location[0]][Location[1]]);
+                if(Bomb_count < Expected) {
+                    Distribute_bombs(Tile_array[Location[0]][Location[1]]);
+                }
+                if(Tile_array[Location[0]][Location[1]].getBomb()){
+                    Bomb_count += 1;
                 }
             }
+
         }
+    }
 
 
     public void Distribute_bombs(Tile tile){
         Random rand = new Random();
         int Random_number = rand.nextInt(x_axis*y_axis);
-        int Bomb_count = 0;
-        if(Random_number < Expected && Bomb_count < Expected-1){
+        if(Random_number < Expected){
             tile.setBomb(true);
-            ++Bomb_count;
         }
     }
 
     public void Draw_grid(){
+        System.out.println("The number of Bombs = "+Bomb_count);
         for(int column = 0; column < x_axis; ++column){
             System.out.println("");
             for(int row = 0; row < y_axis; ++row){
@@ -98,5 +103,16 @@ public class Grid {
             }
         }
         tile.setNearby_bombs(Count);
+    }
+
+    public Boolean Reveal_square (int x_coord, int y_coord){
+        boolean val = true;
+        if(!Tile_array[x_coord][y_coord].getHidden()){
+            Tile_array[x_coord][y_coord].setHidden(true);
+            if(Tile_array[x_coord][y_coord].getBomb()){
+                val = false;
+            }
+        }
+        return val;
     }
 }
