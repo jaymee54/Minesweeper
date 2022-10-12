@@ -14,6 +14,7 @@ public class Grid {
     public Grid(int x_axis,int y_axis){
         this.x_axis = x_axis;
         this.y_axis = y_axis;
+        this.Tile_array = new Tile[x_axis][y_axis];
         for (int x=0;x <= x_axis-1;++x){
             for (int y=0; y <= y_axis-1; ++y){
                 int[] Location = {x-1,y-1};
@@ -25,8 +26,8 @@ public class Grid {
     public void distribute_bombs(Tile tile){
         Random rand = new Random();
         int Random_number = rand.nextInt(x_axis*y_axis)
-        if(rand < Expected){
-            tile.SetBomb();
+        if(Random_number < Expected){
+            tile.SetBomb(true);
         }
     }
 
