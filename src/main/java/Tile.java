@@ -1,8 +1,6 @@
 public class Tile {
     boolean Bomb;
-
     boolean Reveal;
-
     boolean Flag;
     int Nearby_bombs;
     int[] Location;
@@ -15,7 +13,6 @@ public class Tile {
     }
 
     public void setBomb(boolean Bomb) {
-
         this.Bomb = Bomb;
     }
 
@@ -51,4 +48,3 @@ public class Tile {
         return Flag;
     }
 }
-
