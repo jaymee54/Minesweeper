@@ -3,7 +3,7 @@ public class Tile {
 
     boolean Reveal;
 
-    Boolean Flag;
+    boolean Flag;
     int Nearby_bombs;
     int[] Location;
 

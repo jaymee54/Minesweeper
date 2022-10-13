@@ -181,8 +181,14 @@ public class Grid {
         }
     }
 
-    public void Create_flag(Tile tile){
-        tile.setFlag(true);
+    public void Create_flag_or_remove_flag(Tile tile){
+        if(tile.getFlag()){
+            tile.setFlag(false);
+        }
+        else{
+            tile.setFlag(true);
+        }
+
     }
 
     public void Select_difficulty(){
