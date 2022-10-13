@@ -37,6 +37,7 @@ public class Main {
 
             if(x_axis * y_axis - MyGrid.Revealed_squares == MyGrid.Bomb_count){
                 Win_condition = true;
+                Play_game = false;
             }
 
         }while(Play_game);
