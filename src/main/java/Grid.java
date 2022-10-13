@@ -5,6 +5,8 @@ public class Grid {
     int y_axis;
     double difficulty = 1;
     int Bomb_count = 0;
+
+    int Revealed_squares = 0;
     double Expected;
 
     Tile[][] Tile_array;
@@ -110,6 +112,7 @@ public class Grid {
         if(!Tile_array[x_coord][y_coord].getReveal()){
             Work_out_nearby_bombs(Tile_array[x_coord][y_coord]);
             Tile_array[x_coord][y_coord].setReveal(true);
+            Revealed_squares += 1;
             if(Tile_array[x_coord][y_coord].getBomb()){
                 val = false;
             }
@@ -143,4 +146,6 @@ public class Grid {
             }
         }
     }
+
+
 }
