@@ -20,23 +20,21 @@ public class Main {
             MyGrid.Draw_grid();
             System.out.println("");
 
-            System.out.println("input the column");
-            String x_coord = myObj.nextLine();
-            int x = Integer.parseInt(x_coord);
+            int[] Input_location = MyGrid.Select_tile();
 
-            System.out.println("input the row");
-            String y_coord = myObj.nextLine();
-            int y = Integer.parseInt(y_coord);
+            if(MyGrid.Select_flag()){
+                MyGrid.Create_flag(MyGrid.Tile_array[Input_location[0]][Input_location[1]]);
+            }
+            else{
+                Play_game = MyGrid.Reveal_square(Input_location[0],Input_location[1]);
 
-            int[] Input_location = {y-1,x-1};
+                if(MyGrid.Tile_array[Input_location[0]][Input_location[1]].getNearby_bombs() == 0){
+                    MyGrid.Cascade(MyGrid.Tile_array[Input_location[0]][Input_location[1]]);
+                }
 
-            Play_game = MyGrid.Reveal_square(Input_location[0],Input_location[1]);
-
-            if(MyGrid.Tile_array[Input_location[0]][Input_location[1]].getNearby_bombs() == 0){
-                MyGrid.Cascade(MyGrid.Tile_array[Input_location[0]][Input_location[1]]);
             }
 
-            if(x_axis*y_axis- MyGrid.Revealed_squares == MyGrid.Bomb_count){
+            if(x_axis * y_axis - MyGrid.Revealed_squares == MyGrid.Bomb_count){
                 Win_condition = true;
             }
 

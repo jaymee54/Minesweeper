@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.util.Scanner;
 
 public class Grid {
     int x_axis;
@@ -8,13 +9,14 @@ public class Grid {
 
     int Revealed_squares = 0;
     double Expected;
-
     Tile[][] Tile_array;
+    Scanner myObj = new Scanner(System.in);
 
 
     public Grid(int x_axis,int y_axis){
         this.x_axis = x_axis;
         this.y_axis = y_axis;
+        Select_difficulty();
         Expected = x_axis*y_axis*difficulty/7;
         this.Tile_array = new Tile[x_axis][y_axis];
         for (int x=0;x <= x_axis-1;++x){
@@ -31,7 +33,6 @@ public class Grid {
 
         }
     }
-
 
     public void Distribute_bombs(Tile tile){
         Random rand = new Random();
@@ -55,6 +56,9 @@ public class Grid {
                         Work_out_nearby_bombs(Tile_array[column][row]);
                         Current_tile = "[ " + Integer.toString(Tile_array[column][row].getNearby_bombs()) + " ]";
                     }
+                }
+                else if(Tile_array[column][row].getFlag()){
+                    Current_tile = "[ F ]";
                 }
                 else{
                     Current_tile = "[ ~ ]";
@@ -109,12 +113,14 @@ public class Grid {
 
     public Boolean Reveal_square (int x_coord, int y_coord){
         boolean val = true;
-        if(!Tile_array[x_coord][y_coord].getReveal()){
-            Work_out_nearby_bombs(Tile_array[x_coord][y_coord]);
-            Tile_array[x_coord][y_coord].setReveal(true);
-            Revealed_squares += 1;
-            if(Tile_array[x_coord][y_coord].getBomb()){
-                val = false;
+        if (!Tile_array[x_coord][y_coord].getFlag()){
+            if(!Tile_array[x_coord][y_coord].getReveal()){
+                Work_out_nearby_bombs(Tile_array[x_coord][y_coord]);
+                Tile_array[x_coord][y_coord].setReveal(true);
+                Revealed_squares += 1;
+                if(Tile_array[x_coord][y_coord].getBomb()){
+                    val = false;
+                }
             }
         }
         return val;
@@ -147,5 +153,42 @@ public class Grid {
         }
     }
 
+    public int[] Select_tile(){
+        System.out.println("input the column");
+        String x_coord = myObj.nextLine();
+        int x = Integer.parseInt(x_coord);
 
+        System.out.println("input the row");
+        String y_coord = myObj.nextLine();
+        int y = Integer.parseInt(y_coord);
+
+        int[] Input_location = {y-1,x-1};
+        return Input_location;
+    }
+
+    public boolean Select_flag(){
+        System.out.println("Would you like you place a flag or dig? F or D");
+        String flag_input = myObj.nextLine();
+        if(flag_input.toLowerCase().equals("f")){
+            return true;
+        }
+        else if(flag_input.toLowerCase().equals("d")){
+            return false;
+        }
+        else{
+            System.out.println("invalid input try again");
+            return Select_flag(); // best practice don't use recursion for this
+        }
+    }
+
+    public void Create_flag(Tile tile){
+        tile.setFlag(true);
+    }
+
+    public void Select_difficulty(){
+        System.out.println("input the difficulty: 1,2,3,4,5");
+        String diff = myObj.nextLine();
+        difficulty = Integer.parseInt(diff);
+
+    }
 }

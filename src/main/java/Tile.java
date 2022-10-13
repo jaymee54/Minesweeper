@@ -2,6 +2,8 @@ public class Tile {
     boolean Bomb;
 
     boolean Reveal;
+
+    Boolean Flag;
     int Nearby_bombs;
     int[] Location;
 
@@ -9,6 +11,7 @@ public class Tile {
         this.Location = Location;
         this.Bomb = false;
         this.Reveal = false;
+        this.Flag = false;
     }
 
     public void setBomb(boolean Bomb) {
@@ -38,6 +41,14 @@ public class Tile {
 
     public void setReveal(boolean Hidden){
         this.Reveal = Hidden;
+    }
+
+    public void setFlag (boolean Flag){
+        this.Flag = Flag;
+    }
+
+    public boolean getFlag(){
+        return Flag;
     }
 }
 
