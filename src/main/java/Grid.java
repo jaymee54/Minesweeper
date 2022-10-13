@@ -154,6 +154,8 @@ public class Grid {
     }
 
     public int[] Select_tile(){
+        int [] Input_location = new int[2];
+        do{
         System.out.println("input the column");
         String x_coord = myObj.nextLine();
         int x = Integer.parseInt(x_coord);
@@ -162,7 +164,11 @@ public class Grid {
         String y_coord = myObj.nextLine();
         int y = Integer.parseInt(y_coord);
 
-        int[] Input_location = {y-1,x-1};
+        Input_location = new int[] {y - 1, x - 1};
+        if(!is_in_bound(Input_location)){
+            System.out.println("not a valid input");
+        }
+        }while(!is_in_bound(Input_location));
         return Input_location;
     }
 
