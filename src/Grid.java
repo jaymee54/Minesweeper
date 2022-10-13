@@ -115,4 +115,31 @@ public class Grid {
         }
         return val;
     }
+
+    public void Cascade(Tile tile){
+        if (tile.getNearby_bombs() == 0){
+            int[] Location_original = tile.getLocation();
+            for (int x_coord_modifier=-1; x_coord_modifier<=1 ; ++x_coord_modifier) {
+                int[] Location = new int[Location_original.length];
+
+                for(int x = 0; x < Location_original.length; ++x){
+                    Location[x] = Location_original[x];
+                }
+
+                Location[0] += x_coord_modifier;
+                Location[1] -= 2;
+                for (int y_coord_modifier = -1; y_coord_modifier <= 1; ++y_coord_modifier){
+                    Location[1] +=1;
+                    if (is_in_bound(Location)){
+                        if (Tile_array[Location[0]][Location[1]].getHidden()){
+                            Tile_array[Location[0]][Location[1]].setHidden(false);
+                            if(Tile_array[Location[0]][Location[1]].getNearby_bombs() == 0){
+                                Cascade(Tile_array[Location[0]][Location[1]]);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

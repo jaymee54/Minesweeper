@@ -13,8 +13,13 @@ public class Main {
             System.out.println("input the row");
             String y_coord = myObj.nextLine();
             int y = Integer.parseInt(y_coord);
+            int[] Input_location = {x-1,y-1};
 
-            Play_game = MyGrid.Reveal_square(x-1,y-1);
+            Play_game = MyGrid.Reveal_square(Input_location[0],Input_location[1]);
+
+            /*if(MyGrid.Tile_array[Input_location[0]][Input_location[1]].getNearby_bombs() == 0){
+                MyGrid.Cascade(MyGrid.Tile_array[Input_location[0]][Input_location[1]]);
+            }*/
 
         }while(Play_game);
     }
