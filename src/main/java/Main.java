@@ -17,11 +17,10 @@ public class Main {
 
             Play_game = MyGrid.Reveal_square(Input_location[0],Input_location[1]);
 
-            /*if(MyGrid.Tile_array[Input_location[0]][Input_location[1]].getNearby_bombs() == 0){
+            if(MyGrid.Tile_array[Input_location[0]][Input_location[1]].getNearby_bombs() == 0){
                 MyGrid.Cascade(MyGrid.Tile_array[Input_location[0]][Input_location[1]]);
-            }*/
+            }
 
         }while(Play_game);
     }
-
 }

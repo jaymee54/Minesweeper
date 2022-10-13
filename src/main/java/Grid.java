@@ -45,7 +45,7 @@ public class Grid {
             System.out.println("");
             for(int row = 0; row < y_axis; ++row){
                 String Current_tile;
-                if(Tile_array[column][row].getHidden()) {
+                if(Tile_array[column][row].getReveal()) {
                     if(Tile_array[column][row].getBomb()){
                         Current_tile = "[ * ]";
                     }
@@ -107,8 +107,9 @@ public class Grid {
 
     public Boolean Reveal_square (int x_coord, int y_coord){
         boolean val = true;
-        if(!Tile_array[x_coord][y_coord].getHidden()){
-            Tile_array[x_coord][y_coord].setHidden(true);
+        if(!Tile_array[x_coord][y_coord].getReveal()){
+            Work_out_nearby_bombs(Tile_array[x_coord][y_coord]);
+            Tile_array[x_coord][y_coord].setReveal(true);
             if(Tile_array[x_coord][y_coord].getBomb()){
                 val = false;
             }
@@ -131,8 +132,8 @@ public class Grid {
                 for (int y_coord_modifier = -1; y_coord_modifier <= 1; ++y_coord_modifier){
                     Location[1] +=1;
                     if (is_in_bound(Location)){
-                        if (Tile_array[Location[0]][Location[1]].getHidden()){
-                            Tile_array[Location[0]][Location[1]].setHidden(false);
+                        if (!Tile_array[Location[0]][Location[1]].getReveal()){
+                            Reveal_square(Location[0],Location[1]);
                             if(Tile_array[Location[0]][Location[1]].getNearby_bombs() == 0){
                                 Cascade(Tile_array[Location[0]][Location[1]]);
                             }
