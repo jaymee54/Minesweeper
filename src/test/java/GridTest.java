@@ -3,8 +3,9 @@ import org.junit.jupiter.api.Test;
 
 public class GridTest {
     Grid testgrid = new Grid(10,10,1);
+    /*
     @Test
-    public void TestGrid(){
+    public void testGrid(){
         Assertions.assertEquals(10,testgrid.x_axis,"grid x size not 10");
         Assertions.assertEquals(10,testgrid.y_axis,"grid y size not 10");
         Assertions.assertEquals(1,testgrid.difficulty,"grid difficulty not 1");
@@ -19,8 +20,7 @@ public class GridTest {
         Assertions.assertEquals(bombs, testgrid.Bomb_count, "Bomb_count not working correctly");
         Assertions.assertTrue(testgrid.Bomb_count<testgrid.Expected,"more bombs than expected");
     }
+    */
 
-    public void Testis_in_bound(){
-        Assertions.assertEquals(/*test*/);
-    }
+    //public void testis_in_bound(){Assertions.assertEquals(/*test*/;}
 }

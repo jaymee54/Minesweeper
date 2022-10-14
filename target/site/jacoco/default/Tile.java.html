@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Tile.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Maven_Minesweeper</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">Tile.java</span></div><h1>Tile.java</h1><pre class="source lang-java linenums">public class Tile {
+    boolean Bomb;
+    boolean Reveal;
+    boolean Flag;
+    int Nearby_bombs;
+    int[] Location;
+
+<span class="fc" id="L8">    public Tile(int[] Location) {</span>
+<span class="fc" id="L9">        this.Location = Location;</span>
+<span class="fc" id="L10">        this.Bomb = false;</span>
+<span class="fc" id="L11">        this.Reveal = false;</span>
+<span class="fc" id="L12">        this.Flag = false;</span>
+<span class="fc" id="L13">    }</span>
+
+    public void setBomb(boolean Bomb) {
+<span class="fc" id="L16">        this.Bomb = Bomb;</span>
+<span class="fc" id="L17">    }</span>
+
+    public boolean getBomb() {
+<span class="fc" id="L20">        return Bomb;</span>
+    }
+
+    public void setNearby_bombs(int Nearby_bombs) {
+<span class="fc" id="L24">        this.Nearby_bombs = Nearby_bombs;</span>
+<span class="fc" id="L25">    }</span>
+
+    public int getNearby_bombs(){
+<span class="fc" id="L28">        return Nearby_bombs;</span>
+    }
+
+    public int[] getLocation() {
+<span class="fc" id="L32">        return Location;</span>
+    }
+
+    public boolean getReveal() {
+<span class="fc" id="L36">        return Reveal;</span>
+    }
+
+    public void setReveal(boolean Hidden){
+<span class="fc" id="L40">        this.Reveal = Hidden;</span>
+<span class="fc" id="L41">    }</span>
+
+    public void setFlag (boolean Flag){
+<span class="fc" id="L44">        this.Flag = Flag;</span>
+<span class="fc" id="L45">    }</span>
+
+    public boolean getFlag(){
+<span class="fc" id="L48">        return Flag;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

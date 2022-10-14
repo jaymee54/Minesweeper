@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 public class TileTest {
     Tile testtile = new Tile(new int[]{1, 1});
     @Test
-    public void Test_Tile_setup(){
+    public void test_Tile_setup(){
         for(int x=0; x<2; ++x){
             Assertions.assertEquals(1,testtile.getLocation()[x],"The location is incorrect");
         }
@@ -16,7 +16,7 @@ public class TileTest {
     }
 
     @Test
-    public void Test_Tile_getters_and_setters(){
+    public void test_Tile_getters_and_setters(){
         testtile.setBomb(true);
         Assertions.assertEquals(true, testtile.getBomb(), "bomb setter is incorrect");
         testtile.setReveal(true);

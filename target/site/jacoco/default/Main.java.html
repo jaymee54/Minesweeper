@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Main.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Maven_Minesweeper</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">Main.java</span></div><h1>Main.java</h1><pre class="source lang-java linenums">import java.util.Scanner;
+<span class="nc" id="L2">public class Main {</span>
+    public static void main(String[] args) {
+
+<span class="nc" id="L5">        Scanner myObj = new Scanner(System.in);</span>
+<span class="nc" id="L6">        System.out.println(&quot;input the x axis grid size&quot;);</span>
+<span class="nc" id="L7">        String x_axis_length = myObj.nextLine();</span>
+
+<span class="nc" id="L9">        int x_axis = Integer.parseInt(x_axis_length);</span>
+<span class="nc" id="L10">        System.out.println(&quot;input the y axis grid size&quot;);</span>
+<span class="nc" id="L11">        String y_axis_length = myObj.nextLine();</span>
+
+<span class="nc" id="L13">        int y_axis = Integer.parseInt(y_axis_length);</span>
+<span class="nc" id="L14">        Grid MyGrid = new Grid(x_axis,y_axis);</span>
+
+<span class="nc" id="L16">        Boolean Play_game = true;</span>
+<span class="nc" id="L17">        Boolean Win_condition = false;</span>
+
+        do{
+<span class="nc" id="L20">            MyGrid.Draw_grid();</span>
+<span class="nc" id="L21">            System.out.println(&quot;&quot;);</span>
+
+<span class="nc" id="L23">            int[] Input_location = MyGrid.Select_tile();</span>
+
+<span class="nc bnc" id="L25" title="All 2 branches missed.">            if(MyGrid.Select_flag()){</span>
+<span class="nc" id="L26">                MyGrid.Create_flag_or_remove_flag(MyGrid.Tile_array[Input_location[0]][Input_location[1]]);</span>
+            }
+            else{
+<span class="nc bnc" id="L29" title="All 2 branches missed.">                if(!MyGrid.Tile_array[Input_location[0]][Input_location[1]].getFlag()){</span>
+<span class="nc" id="L30">                    Play_game = MyGrid.Reveal_square(Input_location[0],Input_location[1]);</span>
+<span class="nc bnc" id="L31" title="All 2 branches missed.">                    if(MyGrid.Tile_array[Input_location[0]][Input_location[1]].getNearby_bombs() == 0){</span>
+<span class="nc" id="L32">                        MyGrid.Cascade(MyGrid.Tile_array[Input_location[0]][Input_location[1]]);</span>
+                    }
+                }
+
+            }
+
+<span class="nc bnc" id="L38" title="All 2 branches missed.">            if(x_axis * y_axis - MyGrid.Revealed_squares == MyGrid.Bomb_count){</span>
+<span class="nc" id="L39">                Win_condition = true;</span>
+<span class="nc" id="L40">                Play_game = false;</span>
+            }
+
+<span class="nc bnc" id="L43" title="All 2 branches missed.">        }while(Play_game);</span>
+<span class="nc bnc" id="L44" title="All 2 branches missed.">        if(Win_condition){</span>
+<span class="nc" id="L45">            System.out.println((&quot;Well done! You win!&quot;));</span>
+        }
+        else{
+<span class="nc" id="L48">            System.out.println(&quot;You hit a bomb. You Lose!&quot;);</span>
+        }
+<span class="nc" id="L50">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

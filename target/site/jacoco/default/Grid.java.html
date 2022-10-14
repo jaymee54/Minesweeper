@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Grid.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Maven_Minesweeper</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">Grid.java</span></div><h1>Grid.java</h1><pre class="source lang-java linenums">import java.util.Random;
+import java.util.Scanner;
+
+public class Grid {
+    int x_axis;
+    int y_axis;
+<span class="pc" id="L7">    double difficulty = 1;</span>
+<span class="pc" id="L8">    int Bomb_count = 0;</span>
+<span class="pc" id="L9">    int Revealed_squares = 0;</span>
+    double Expected;
+    Tile[][] Tile_array;
+<span class="pc" id="L12">    Scanner myObj = new Scanner(System.in);</span>
+
+
+<span class="nc" id="L15">    public Grid(int x_axis,int y_axis){</span>
+<span class="nc" id="L16">        this.x_axis = x_axis;</span>
+<span class="nc" id="L17">        this.y_axis = y_axis;</span>
+<span class="nc" id="L18">        Select_difficulty();</span>
+<span class="nc" id="L19">        Expected = x_axis*y_axis*difficulty/7;</span>
+<span class="nc" id="L20">        this.Tile_array = new Tile[x_axis][y_axis];</span>
+<span class="nc bnc" id="L21" title="All 2 branches missed.">        for (int x=0;x &lt;= x_axis-1;++x){</span>
+<span class="nc bnc" id="L22" title="All 2 branches missed.">            for (int y=0; y &lt;= y_axis-1; ++y){</span>
+<span class="nc" id="L23">                int[] Location = {x,y};</span>
+<span class="nc" id="L24">                Tile_array[Location[0]][Location[1]] = new Tile(Location);</span>
+<span class="nc bnc" id="L25" title="All 2 branches missed.">                if(Bomb_count &lt; Expected) {</span>
+<span class="nc" id="L26">                    Distribute_bombs(Tile_array[Location[0]][Location[1]]);</span>
+                }
+<span class="nc bnc" id="L28" title="All 2 branches missed.">                if(Tile_array[Location[0]][Location[1]].getBomb()){</span>
+<span class="nc" id="L29">                    Bomb_count += 1;</span>
+                }
+            }
+
+        }
+<span class="nc" id="L34">    }</span>
+
+<span class="fc" id="L36">    public Grid(int x_axis,int y_axis,int diff){</span>
+<span class="fc" id="L37">        this.x_axis = x_axis;</span>
+<span class="fc" id="L38">        this.y_axis = y_axis;</span>
+<span class="fc" id="L39">        this.difficulty = diff;</span>
+<span class="fc" id="L40">        Expected = x_axis*y_axis*difficulty/7;</span>
+<span class="fc" id="L41">        this.Tile_array = new Tile[x_axis][y_axis];</span>
+<span class="fc bfc" id="L42" title="All 2 branches covered.">        for (int x=0;x &lt;= x_axis-1;++x){</span>
+<span class="fc bfc" id="L43" title="All 2 branches covered.">            for (int y=0; y &lt;= y_axis-1; ++y){</span>
+<span class="fc" id="L44">                int[] Location = {x,y};</span>
+<span class="fc" id="L45">                Tile_array[Location[0]][Location[1]] = new Tile(Location);</span>
+<span class="pc bpc" id="L46" title="1 of 2 branches missed.">                if(Bomb_count &lt; Expected) {</span>
+<span class="fc" id="L47">                    Distribute_bombs(Tile_array[Location[0]][Location[1]]);</span>
+                }
+<span class="fc bfc" id="L49" title="All 2 branches covered.">                if(Tile_array[Location[0]][Location[1]].getBomb()){</span>
+<span class="fc" id="L50">                    Bomb_count += 1;</span>
+                }
+            }
+
+        }
+<span class="fc" id="L55">    }</span>
+
+    public void Distribute_bombs(Tile tile){
+<span class="fc" id="L58">        Random rand = new Random();</span>
+<span class="fc" id="L59">        int Random_number = rand.nextInt(x_axis*y_axis);</span>
+<span class="fc bfc" id="L60" title="All 2 branches covered.">        if(Random_number &lt; Expected){</span>
+<span class="fc" id="L61">            tile.setBomb(true);</span>
+        }
+<span class="fc" id="L63">    }</span>
+
+    public void Draw_grid(){
+<span class="nc" id="L66">        System.out.println(&quot;The number of Bombs = &quot;+Bomb_count);</span>
+<span class="nc bnc" id="L67" title="All 2 branches missed.">        for(int column = 0; column &lt; x_axis; ++column){</span>
+<span class="nc" id="L68">            System.out.println(&quot;&quot;);</span>
+<span class="nc bnc" id="L69" title="All 2 branches missed.">            for(int row = 0; row &lt; y_axis; ++row){</span>
+                String Current_tile;
+<span class="nc bnc" id="L71" title="All 2 branches missed.">                if(Tile_array[column][row].getReveal()) {</span>
+<span class="nc bnc" id="L72" title="All 2 branches missed.">                    if(Tile_array[column][row].getBomb()){</span>
+<span class="nc" id="L73">                        Current_tile = &quot;[ * ]&quot;;</span>
+                    }
+                    else {
+<span class="nc" id="L76">                        Work_out_nearby_bombs(Tile_array[column][row]);</span>
+<span class="nc" id="L77">                        Current_tile = &quot;[ &quot; + Integer.toString(Tile_array[column][row].getNearby_bombs()) + &quot; ]&quot;;</span>
+                    }
+                }
+<span class="nc bnc" id="L80" title="All 2 branches missed.">                else if(Tile_array[column][row].getFlag()){</span>
+<span class="nc" id="L81">                    Current_tile = &quot;[ F ]&quot;;</span>
+                }
+                else{
+<span class="nc" id="L84">                    Current_tile = &quot;[ ~ ]&quot;;</span>
+                }
+<span class="nc" id="L86">                System.out.print(Current_tile);</span>
+            }
+        }
+<span class="nc" id="L89">    }</span>
+
+    public Boolean is_in_bound(int[] Location){
+<span class="nc bnc" id="L92" title="All 2 branches missed.">        if(Location[0]  &lt; 0 ){</span>
+<span class="nc" id="L93">            return false;</span>
+        }
+<span class="nc bnc" id="L95" title="All 2 branches missed.">        else if(Location[0]  &gt; x_axis-1){</span>
+<span class="nc" id="L96">            return false;</span>
+        }
+<span class="nc bnc" id="L98" title="All 2 branches missed.">        else if (Location[1]  &lt; 0){</span>
+<span class="nc" id="L99">            return false;</span>
+        }
+<span class="nc bnc" id="L101" title="All 2 branches missed.">        else if (Location[1] &gt; y_axis-1){</span>
+<span class="nc" id="L102">            return false;</span>
+        }
+        else{
+<span class="nc" id="L105">            return true;</span>
+        }
+    }
+
+    public void Work_out_nearby_bombs(Tile tile){
+<span class="nc" id="L110">        int Count = 0;</span>
+<span class="nc" id="L111">        int[] Location_original = tile.getLocation();</span>
+<span class="nc bnc" id="L112" title="All 2 branches missed.">        for (int x_coord_modifier=-1; x_coord_modifier&lt;=1 ; ++x_coord_modifier) {</span>
+<span class="nc" id="L113">            int[] Location = new int[Location_original.length];</span>
+
+<span class="nc bnc" id="L115" title="All 2 branches missed.">            for(int x = 0; x &lt; Location_original.length; ++x){</span>
+<span class="nc" id="L116">                Location[x] = Location_original[x];</span>
+            }
+
+<span class="nc" id="L119">            Location[0] += x_coord_modifier;</span>
+<span class="nc" id="L120">            Location[1] -= 2;</span>
+<span class="nc bnc" id="L121" title="All 2 branches missed.">            for (int y_coord_modifier = -1; y_coord_modifier &lt;= 1; ++y_coord_modifier){</span>
+<span class="nc" id="L122">                Location[1] +=1;</span>
+<span class="nc bnc" id="L123" title="All 2 branches missed.">                if (is_in_bound(Location)){</span>
+<span class="nc bnc" id="L124" title="All 2 branches missed.">                    if(Tile_array[Location[0]][Location[1]].getBomb()){</span>
+<span class="nc" id="L125">                        ++Count;</span>
+                    }
+                }
+
+            }
+        }
+<span class="nc" id="L131">        tile.setNearby_bombs(Count);</span>
+<span class="nc" id="L132">    }</span>
+
+    public Boolean Reveal_square (int x_coord, int y_coord){
+<span class="nc" id="L135">        boolean val = true;</span>
+<span class="nc bnc" id="L136" title="All 2 branches missed.">        if (!Tile_array[x_coord][y_coord].getFlag()){</span>
+<span class="nc bnc" id="L137" title="All 2 branches missed.">            if(!Tile_array[x_coord][y_coord].getReveal()){</span>
+<span class="nc" id="L138">                Work_out_nearby_bombs(Tile_array[x_coord][y_coord]);</span>
+<span class="nc" id="L139">                Tile_array[x_coord][y_coord].setReveal(true);</span>
+<span class="nc" id="L140">                Revealed_squares += 1;</span>
+<span class="nc bnc" id="L141" title="All 2 branches missed.">                if(Tile_array[x_coord][y_coord].getBomb()){</span>
+<span class="nc" id="L142">                    val = false;</span>
+                }
+            }
+        }
+<span class="nc" id="L146">        return val;</span>
+    }
+
+    public void Cascade(Tile tile){
+<span class="nc bnc" id="L150" title="All 2 branches missed.">        if (tile.getNearby_bombs() == 0){</span>
+<span class="nc" id="L151">            int[] Location_original = tile.getLocation();</span>
+<span class="nc bnc" id="L152" title="All 2 branches missed.">            for (int x_coord_modifier=-1; x_coord_modifier&lt;=1 ; ++x_coord_modifier) {</span>
+<span class="nc" id="L153">                int[] Location = new int[Location_original.length];</span>
+
+<span class="nc bnc" id="L155" title="All 2 branches missed.">                for(int x = 0; x &lt; Location_original.length; ++x){</span>
+<span class="nc" id="L156">                    Location[x] = Location_original[x];</span>
+                }
+
+<span class="nc" id="L159">                Location[0] += x_coord_modifier;</span>
+<span class="nc" id="L160">                Location[1] -= 2;</span>
+<span class="nc bnc" id="L161" title="All 2 branches missed.">                for (int y_coord_modifier = -1; y_coord_modifier &lt;= 1; ++y_coord_modifier){</span>
+<span class="nc" id="L162">                    Location[1] +=1;</span>
+<span class="nc bnc" id="L163" title="All 2 branches missed.">                    if (is_in_bound(Location)){</span>
+<span class="nc bnc" id="L164" title="All 2 branches missed.">                        if (!Tile_array[Location[0]][Location[1]].getReveal()){</span>
+<span class="nc" id="L165">                            Reveal_square(Location[0],Location[1]);</span>
+<span class="nc bnc" id="L166" title="All 2 branches missed.">                            if(Tile_array[Location[0]][Location[1]].getNearby_bombs() == 0){</span>
+<span class="nc" id="L167">                                Cascade(Tile_array[Location[0]][Location[1]]);</span>
+                            }
+                        }
+                    }
+                }
+            }
+        }
+<span class="nc" id="L174">    }</span>
+
+    public int[] Select_tile(){
+<span class="nc" id="L177">        int [] Input_location = new int[2];</span>
+        do {
+<span class="nc" id="L179">            System.out.println(&quot;input the column&quot;);</span>
+<span class="nc" id="L180">            String x_coord = myObj.nextLine();</span>
+<span class="nc" id="L181">            int x = Integer.parseInt(x_coord);</span>
+
+<span class="nc" id="L183">            System.out.println(&quot;input the row&quot;);</span>
+<span class="nc" id="L184">            String y_coord = myObj.nextLine();</span>
+<span class="nc" id="L185">            int y = Integer.parseInt(y_coord);</span>
+
+<span class="nc" id="L187">            Input_location = new int[] {y - 1, x - 1};</span>
+<span class="nc bnc" id="L188" title="All 2 branches missed.">            if(!is_in_bound(Input_location)){</span>
+<span class="nc" id="L189">                System.out.println(&quot;not a valid input&quot;);</span>
+            }
+<span class="nc bnc" id="L191" title="All 2 branches missed.">        }while(!is_in_bound(Input_location));</span>
+<span class="nc" id="L192">        return Input_location;</span>
+    }
+
+    public boolean Select_flag(){
+<span class="nc" id="L196">        System.out.println(&quot;Would you like you place a flag or dig? F or D&quot;);</span>
+<span class="nc" id="L197">        String flag_input = myObj.nextLine();</span>
+<span class="nc bnc" id="L198" title="All 2 branches missed.">        if(flag_input.toLowerCase().equals(&quot;f&quot;)){</span>
+<span class="nc" id="L199">            return true;</span>
+        }
+<span class="nc bnc" id="L201" title="All 2 branches missed.">        else if(flag_input.toLowerCase().equals(&quot;d&quot;)){</span>
+<span class="nc" id="L202">            return false;</span>
+        }
+        else{
+<span class="nc" id="L205">            System.out.println(&quot;invalid input try again&quot;);</span>
+<span class="nc" id="L206">            return Select_flag(); // best practice don't use recursion for this</span>
+        }
+    }
+
+    public void Create_flag_or_remove_flag(Tile tile){
+<span class="nc bnc" id="L211" title="All 2 branches missed.">        if(tile.getFlag()){</span>
+<span class="nc" id="L212">            tile.setFlag(false);</span>
+        }
+        else{
+<span class="nc" id="L215">            tile.setFlag(true);</span>
+        }
+
+<span class="nc" id="L218">    }</span>
+
+    public void Select_difficulty(){
+<span class="nc" id="L221">        System.out.println(&quot;input the difficulty: 1,2,3,4,5&quot;);</span>
+<span class="nc" id="L222">        String diff = myObj.nextLine();</span>
+<span class="nc" id="L223">        difficulty = Integer.parseInt(diff);</span>
+
+<span class="nc" id="L225">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
