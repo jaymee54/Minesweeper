@@ -43,7 +43,7 @@ public class Grid {
 <span class="fc bfc" id="L43" title="All 2 branches covered.">            for (int y=0; y &lt;= y_axis-1; ++y){</span>
 <span class="fc" id="L44">                int[] Location = {x,y};</span>
 <span class="fc" id="L45">                Tile_array[Location[0]][Location[1]] = new Tile(Location);</span>
-<span class="pc bpc" id="L46" title="1 of 2 branches missed.">                if(Bomb_count &lt; Expected) {</span>
+<span class="fc bfc" id="L46" title="All 2 branches covered.">                if(Bomb_count &lt; Expected) {</span>
 <span class="fc" id="L47">                    Distribute_bombs(Tile_array[Location[0]][Location[1]]);</span>
                 }
 <span class="fc bfc" id="L49" title="All 2 branches covered.">                if(Tile_array[Location[0]][Location[1]].getBomb()){</span>
